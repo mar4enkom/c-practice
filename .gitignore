@@ -53,3 +53,17 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled executables (without extension)
+binary_exponentation_mod
+binary_exponentiation_mod
+naive_binary_exponentation_mod

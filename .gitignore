@@ -63,7 +63,4 @@ dkms.conf
 ehthumbs.db
 Thumbs.db
 
-# Compiled executables (without extension)
-binary_exponentation_mod
-binary_exponentiation_mod
-naive_binary_exponentation_mod
+.vscode

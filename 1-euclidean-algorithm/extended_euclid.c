@@ -19,23 +19,7 @@ void extended_euclid(
     long long x,
     long long y
 ) {
-  long long r, q, u, u_old, v, v_old;
-
-  if(y > x) {
-    long long temp = y;
-    y = x;
-    x = temp;
-    u = 1;
-    v = 0;
-    u_old = 0;
-    v_old = 1;
-  } else {
-    u = 0;
-    v = 1;
-    u_old = 1;
-    v_old = 0;
-  }
-
+  long long r, q, u = 0, u_old = 1, v = 1, v_old = 0;
   do {
     r = eu_mod(x, y);
     q = (x-r) / y;
@@ -46,6 +30,7 @@ void extended_euclid(
     v = v_old - q * v;
     u_old = u_temp;
     v_old = v_temp;
+    printf("r = %lld, q = %lld, u_old = %lld \n", r, q, u_old);
   } while (r != 0);
   
   printf("%lld %lld %lld", u_old, v_old, x);

@@ -17,27 +17,19 @@ unsigned char n_bit(unsigned char num, unsigned char n) {
 }
 
 void fill_sieve(struct sieve_t *sv) {
-  int n_bits = sv->n*8;
+  unsigned long long n_bits = sv->n*8;
 
-  int total_bit_num, byte_num;
-  for (int i=5; i*i<n_bits*6; i+=6) {
-    for (int j=i*i; j<=n_bits*6; j+=(i*6)) {
+  unsigned total_bit_num, byte_num;
+  for (unsigned long long i=5; i*i<n_bits*6; i+=(i%6==5 ? 2 : 4)) {
+    for (unsigned long long j=i*i; j<=n_bits*6; j+=(i*6)) {
       total_bit_num = j / 6;
       byte_num = total_bit_num / 8;
       sv->mod1[byte_num] = set_n_bit(sv->mod1[byte_num], total_bit_num%8);
     }
   }
 
-  for (int i=7; i*i<n_bits*6; i+=6) {
-    for (int j=i*i; j<=n_bits*6; j+=(i*6)) {
-      total_bit_num = j / 6;
-      byte_num = total_bit_num / 8;
-      sv->mod1[byte_num] = set_n_bit(sv->mod1[byte_num], total_bit_num%8);
-    }
-  }
-
-  for (int i=5; i*7<n_bits*6; i+=6) {
-    for (int j=i*7; j<=n_bits*6; j+=(i*6)) {
+  for (unsigned long long i=5; i*7<n_bits*6; i+=6) {
+    for (unsigned long long j=i*7; j<=n_bits*6; j+=(i*6)) {
       total_bit_num = j / 6;
       byte_num = total_bit_num / 8;
       sv->mod5[byte_num] = set_n_bit(sv->mod5[byte_num], total_bit_num%8);
@@ -46,8 +38,8 @@ void fill_sieve(struct sieve_t *sv) {
 }
 
 int is_prime(struct sieve_t *sv, unsigned n) {
-  int total_bit_num = n / 6;
-  int byte_num = total_bit_num / 8;
+  unsigned total_bit_num = n / 6;
+  unsigned byte_num = total_bit_num / 8;
 
   if (n <= 3) {
     return 1;
@@ -64,7 +56,7 @@ int is_prime(struct sieve_t *sv, unsigned n) {
 }
 
 int main() {
-    int N = 1000000;
+    int N = 104857600;
     struct sieve_t sv = {
         .n = N,
         .mod1 = calloc(N, sizeof(char)),
